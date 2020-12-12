@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
-const ACCELERATION = 500
-const MAX_SPEED = 80
-const FRICTION = 500
+const ACCELERATION: int = 500
+const MAX_SPEED: int = 80
+const FRICTION: int = 500
 
 enum {
 	MOVE,
@@ -12,7 +12,7 @@ enum {
 
 var state = MOVE
 
-var velocity = Vector2.ZERO
+var velocity: Vector2 = Vector2.ZERO
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
@@ -21,7 +21,7 @@ onready var animationState = animationTree.get("parameters/playback")
 func _ready():
 	animationTree.active = true
 
-func _physics_process(delta):
+func _process(delta):
 	match state:
 		MOVE:
 			move_state(delta)
