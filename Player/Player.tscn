@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Player/Animations/PlayerAttackDown.tres" type="Animation" id=14]
 [ext_resource path="res://collisions/HitBox.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Player/SwordHitBox.gd" type="Script" id=16]
+[ext_resource path="res://collisions/HurtBox.tscn" type="PackedScene" id=17]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.00001
@@ -271,6 +272,10 @@ graph_offset = Vector2( 6, -38.089 )
 [sub_resource type="CapsuleShape2D" id=34]
 height = 12.0
 
+[sub_resource type="CapsuleShape2D" id=35]
+radius = 5.60882
+height = 6.36421
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
@@ -325,4 +330,14 @@ script = ExtResource( 16 )
 shape = SubResource( 34 )
 disabled = true
 
+[node name="HurtBox" parent="." instance=ExtResource( 17 )]
+collision_layer = 4
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2( -0.280937, -5.89958 )
+shape = SubResource( 35 )
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+
 [editable path="SwordPosition/SwordHitBox"]
+
+[editable path="HurtBox"]

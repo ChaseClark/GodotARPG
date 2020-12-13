@@ -11,6 +11,7 @@ enum {
 onready var stats = $Stats
 onready var detection_zone = $PlayerSelectionZone
 onready var animated_sprite = $AnimatedSprite
+onready var hurtbox = $HurtBox
 
 export var acceleration = 300
 export var max_speed = 50
@@ -51,6 +52,7 @@ func seek_player():
 func _on_HurtBox_area_entered(area):
 	stats.health -= area.damage
 	knockback = area.knockback_vector * 120
+	hurtbox.create_hit_effect()
 	
 func _on_Stats_dead():
 	# animation

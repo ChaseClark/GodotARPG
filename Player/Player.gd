@@ -15,13 +15,16 @@ var state = MOVE
 
 var velocity: Vector2 = Vector2.ZERO
 var roll_vector: Vector2 = Vector2.DOWN # start down to match blend positoins
+var stats = PlayerStats
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var swordHitbox = $SwordPosition/SwordHitBox
+onready var hurtbox = $HurtBox
 onready var animationState = animationTree.get("parameters/playback")
 
 func _ready():
+	stats.connect("dead", self, "queue_free")
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
 
@@ -79,3 +82,9 @@ func attack_animation_finished():
 func roll_animation_finished():
 	velocity = Vector2.ZERO
 	state = MOVE
+
+
+func _on_HurtBox_area_entered(area):
+	stats.health -= 1
+	hurtbox.start_invincibility(0.5)
+	hurtbox.create_hit_effect()
