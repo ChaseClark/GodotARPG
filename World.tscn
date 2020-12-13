@@ -523,6 +523,9 @@ position = Vector2( 8, 88 )
 [node name="AnimationTree" parent="YSort/Player" index="4"]
 parameters/playback = SubResource( 50 )
 
+[node name="SwordPosition" parent="YSort/Player" index="5"]
+rotation = 1.5708
+
 [node name="Bushes" type="YSort" parent="YSort"]
 
 [node name="Bush" parent="YSort/Bushes" instance=ExtResource( 1 )]

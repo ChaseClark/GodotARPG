@@ -12,6 +12,7 @@ onready var stats = $Stats
 onready var detection_zone = $PlayerSelectionZone
 onready var animated_sprite = $AnimatedSprite
 onready var hurtbox = $HurtBox
+onready var soft_collision = $SoftCollision
 
 export var acceleration = 300
 export var max_speed = 50
@@ -37,12 +38,14 @@ func _physics_process(delta):
 		CHASE:
 			var player = detection_zone.player
 			if player: # != null
-				var direction_vector = global_position.direction_to(player.global_position).normalized()
+				var direction_vector = global_position.direction_to(player.global_position)
 				velocity = velocity.move_toward(direction_vector * max_speed, acceleration * delta)
 			else:
 				state = IDLE
-	
-	animated_sprite.flip_h = velocity.x	< 0		
+			animated_sprite.flip_h = velocity.x	< 0	
+			
+	if soft_collision.is_colliding():
+		velocity += soft_collision.get_push_vector() * delta * 400			
 	velocity = move_and_slide(velocity)
 
 func seek_player():
