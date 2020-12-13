@@ -290,7 +290,7 @@ texture = ExtResource( 18 )
 position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 hframes = 60
-frame = 19
+frame = 37
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -325,7 +325,7 @@ parameters/Run/blend_position = Vector2( 0, 1 )
 
 [node name="SwordPosition" type="Position2D" parent="."]
 position = Vector2( 0, -4 )
-rotation = 3.14159
+rotation = 1.5708
 
 [node name="SwordHitBox" parent="SwordPosition" instance=ExtResource( 15 )]
 position = Vector2( 15, 0 )
@@ -334,7 +334,6 @@ script = ExtResource( 16 )
 
 [node name="CollisionShape2D" parent="SwordPosition/SwordHitBox" index="0"]
 shape = SubResource( 34 )
-disabled = true
 
 [node name="HurtBox" parent="." instance=ExtResource( 17 )]
 collision_layer = 4
