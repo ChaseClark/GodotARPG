@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Shadows/SmallShadow.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/Bat.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://collisions/PlayerSelectionZone.tscn" type="PackedScene" id=6]
 [ext_resource path="res://collisions/HitBox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://collisions/SoftCollision.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Enemies/WanderController.tscn" type="PackedScene" id=9]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -122,6 +123,8 @@ anims/shadow = SubResource( 11 )
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
 shape = SubResource( 12 )
+
+[node name="WanderController" parent="." instance=ExtResource( 9 )]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="dead" from="Stats" to="." method="_on_Stats_dead"]
 

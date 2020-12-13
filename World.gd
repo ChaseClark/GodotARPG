@@ -7,3 +7,6 @@ func _process(delta):
 func reload() -> void:
 	get_tree().reload_current_scene()
 	PlayerStats.health = PlayerStats.max_health
+
+func _ready():
+	randomize()
