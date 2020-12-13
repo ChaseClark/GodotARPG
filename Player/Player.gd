@@ -14,7 +14,7 @@ enum {
 var state = MOVE
 
 var velocity: Vector2 = Vector2.ZERO
-var roll_vector: Vector2 = Vector2.LEFT
+var roll_vector: Vector2 = Vector2.DOWN # start down to match blend positoins
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
