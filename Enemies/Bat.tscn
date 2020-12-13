@@ -56,15 +56,14 @@ __meta__ = {
 "_edit_group_": true
 }
 
+[node name="ShadowSprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -12 )
 frames = SubResource( 6 )
 animation = "fly"
-frame = 3
 playing = true
-
-[node name="ShadowSprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 7 )
