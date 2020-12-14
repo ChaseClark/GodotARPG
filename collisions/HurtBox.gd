@@ -3,6 +3,7 @@ extends Area2D
 const HitEffect = preload("res://Effects/HitEffect.tscn")
 
 onready var timer = $InvincibilityTimer
+onready var collision_shape = $CollisionShape2D
 
 var invincible: bool = false setget set_invincible
 
@@ -31,10 +32,8 @@ func create_hit_effect():
 func _on_InvincibilityTimer_timeout():
 	self.invincible = false # self calls the setter func
 
+func _on_HurtBox_invincibility_started():
+	collision_shape.set_deferred("disabled", true) # cycles so that we can get hit by the bat multiple times
 
 func _on_HurtBox_invincibility_ended():
-	set_deferred("monitorable", false)
-
-
-func _on_HurtBox_invincibility_started():
-	set_deferred("monitorable", true) # cycles so that we can get hit by the bat multiple times
+	collision_shape.set_deferred("disabled", false)

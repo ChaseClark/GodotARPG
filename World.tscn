@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Enemies/Bat.tscn" type="PackedScene" id=8]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=9]
 [ext_resource path="res://World/Tree.tscn" type="PackedScene" id=10]
+[ext_resource path="res://World/PlayerCam.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
@@ -485,6 +486,26 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="Shader" id=51]
+code = "shader_type canvas_item;
+
+uniform bool active = false;
+
+void fragment() {
+	vec4 previous_color = texture(TEXTURE, UV);
+	vec4 white_color = vec4(1.0,1.0,1.0,previous_color.a);
+	vec4 new_color = previous_color;
+	if (active == true) {
+		new_color = white_color;
+	}
+	COLOR = new_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=52]
+resource_local_to_scene = true
+shader = SubResource( 51 )
+shader_param/active = false
+
 [sub_resource type="AnimationNodeStateMachinePlayback" id=50]
 
 [node name="World" type="Node2D"]
@@ -522,14 +543,17 @@ __meta__ = {
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 8, 88 )
 
-[node name="AnimationTree" parent="YSort/Player" index="4"]
+[node name="Sprite" parent="YSort/Player" index="1"]
+material = SubResource( 52 )
+
+[node name="AnimationTree" parent="YSort/Player" index="5"]
 parameters/playback = SubResource( 50 )
 
-[node name="SwordPosition" parent="YSort/Player" index="5"]
+[node name="SwordPosition" parent="YSort/Player" index="6"]
 rotation = 1.5708
 
-[node name="RemoteTransform2D" parent="YSort/Player" index="7"]
-remote_path = NodePath("../../../Camera2D")
+[node name="RemoteTransform2D" parent="YSort/Player" index="8"]
+remote_path = NodePath("../../../PlayerCam")
 
 [node name="Bushes" type="YSort" parent="YSort"]
 
@@ -640,9 +664,15 @@ margin_top = 4.76219
 margin_right = 63.3496
 margin_bottom = 16.7622
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="PlayerCam" parent="." instance=ExtResource( 11 )]
 position = Vector2( 8, 88 )
-current = true
-smoothing_enabled = true
+
+[node name="TopLeftPos" parent="PlayerCam/Limits" index="0"]
+position = Vector2( -256.622, -154.913 )
+
+[node name="BottomRightPos" parent="PlayerCam/Limits" index="1"]
+position = Vector2( 581.719, 337.937 )
 
 [editable path="YSort/Player"]
+
+[editable path="PlayerCam"]
