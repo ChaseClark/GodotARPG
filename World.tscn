@@ -486,7 +486,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="Shader" id=51]
+[sub_resource type="Shader" id=50]
 code = "shader_type canvas_item;
 
 uniform bool active = false;
@@ -501,12 +501,12 @@ void fragment() {
 	COLOR = new_color;
 }"
 
-[sub_resource type="ShaderMaterial" id=52]
+[sub_resource type="ShaderMaterial" id=51]
 resource_local_to_scene = true
-shader = SubResource( 51 )
+shader = SubResource( 50 )
 shader_param/active = false
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=50]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=52]
 
 [node name="World" type="Node2D"]
 position = Vector2( 0, -0.561234 )
@@ -544,10 +544,10 @@ __meta__ = {
 position = Vector2( 8, 88 )
 
 [node name="Sprite" parent="YSort/Player" index="1"]
-material = SubResource( 52 )
+material = SubResource( 51 )
 
 [node name="AnimationTree" parent="YSort/Player" index="5"]
-parameters/playback = SubResource( 50 )
+parameters/playback = SubResource( 52 )
 
 [node name="SwordPosition" parent="YSort/Player" index="6"]
 rotation = 1.5708
